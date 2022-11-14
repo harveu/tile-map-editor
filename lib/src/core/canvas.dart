@@ -1,7 +1,7 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
-import 'package:harveu/src/canvas_painter.dart';
+import 'package:harveu/src/core/canvas_painter.dart';
 import 'package:harveu/src/core/load_image.dart';
 import 'package:harveu/src/core/tile_map_editor.dart';
 

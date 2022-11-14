@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:harveu/src/canvas.dart';
-import 'package:harveu/src/layers.dart';
-import 'package:harveu/src/tiles.dart';
-import 'package:harveu/src/topbar.dart';
+import 'package:harveu/src/core/canvas.dart';
+import 'package:harveu/src/ui/layers.dart';
+import 'package:harveu/src/ui/tiles.dart';
+import 'package:harveu/src/ui/topbar.dart';
 
 class LayoutEditor extends StatelessWidget {
   const LayoutEditor({super.key});
-
-  void setLayer(int layer) {
-    print("setLayer $layer");
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +33,7 @@ class LayoutEditor extends StatelessWidget {
                         child: const TileMapCanvas(),
                       ),
                     ),
-                    Layers(setLayer: setLayer),
+                    const Layers(),
                   ],
                 ),
               ),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:harveu/src/core/tile_map_editor.dart';
 
 class Topbar extends StatelessWidget {
   const Topbar({super.key});
@@ -24,12 +27,14 @@ class Topbar extends StatelessWidget {
           ),
           const Spacer(),
           TextButton(
-            onPressed: () {},
+            onPressed: () => Provider.of<TileMapEditor>(context, listen: false)
+                .clearCanvas(),
             child: const Text('Clear Canvas'),
           ),
           const SizedBox(width: 15.0),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () =>
+                Provider.of<TileMapEditor>(context, listen: false).exportMap(),
             child: const Text('Export Map Image'),
           ),
         ],

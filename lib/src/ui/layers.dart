@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:harveu/src/core/tile_map_editor.dart';
 
 class Layers extends StatelessWidget {
-  final void Function(int layer) setLayer;
-
-  const Layers({super.key, required this.setLayer});
+  const Layers({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,17 +25,23 @@ class Layers extends StatelessWidget {
           Row(
             children: [
               ElevatedButton(
-                onPressed: () => setLayer(0),
+                onPressed: () =>
+                    Provider.of<TileMapEditor>(context, listen: false)
+                        .setLayer(0),
                 child: const Text('Bottom Layer'),
               ),
               const SizedBox(width: 15.0),
               ElevatedButton(
-                onPressed: () => setLayer(1),
+                onPressed: () =>
+                    Provider.of<TileMapEditor>(context, listen: false)
+                        .setLayer(1),
                 child: const Text('Middle Layer'),
               ),
               const SizedBox(width: 15.0),
               ElevatedButton(
-                onPressed: () => setLayer(2),
+                onPressed: () =>
+                    Provider.of<TileMapEditor>(context, listen: false)
+                        .setLayer(2),
                 child: const Text('Top Layer'),
               ),
             ],

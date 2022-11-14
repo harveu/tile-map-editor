@@ -1,4 +1,6 @@
-class TileMapEditor {
+import 'package:flutter/material.dart';
+
+class TileMapEditor extends ChangeNotifier {
   static final TileMapEditor _instance = TileMapEditor._internal();
 
   factory TileMapEditor() {
@@ -6,12 +8,46 @@ class TileMapEditor {
   }
 
   TileMapEditor._internal() {
-    // init logic
+    _tileset = 'TileEditorSpritesheet.png';
+    _tileSize = 32.0;
+
+    _layers = _defaultLayers;
+    _currentLayer = 0;
   }
 
-  final String tileset = 'TileEditorSpritesheet.png';
-  final double tileSize = 32.0;
-  final List<Map<String, List<int>>> layers = [
+  late String _tileset;
+  String get tileset => _tileset;
+  set tileset(String tile) {
+    _tileset = tile;
+    notifyListeners();
+  }
+
+  late double _tileSize;
+  double get tileSize => _tileSize;
+  set tileSize(double size) {
+    _tileSize = size;
+    notifyListeners();
+  }
+
+  late List<Map<String, List<int>>> _layers;
+  List<Map<String, List<int>>> get layers => _layers;
+  void clearCanvas() {
+    print('clearCanvas');
+    _layers = [{}, {}, {}];
+    // TODO: re-draw canvas
+    notifyListeners();
+  }
+
+  late int _currentLayer;
+  int get currentLayer => _currentLayer;
+  void setLayer(int layer) {
+    _currentLayer = layer;
+    notifyListeners();
+  }
+
+  void exportMap() {}
+
+  final List<Map<String, List<int>>> _defaultLayers = [
     // Bottom
     {
       "0-4": [3, 2],

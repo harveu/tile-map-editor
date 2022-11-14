@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'package:harveu/src/layout.dart';
+import 'package:harveu/src/ui/layout.dart';
+import 'package:harveu/src/core/tile_map_editor.dart';
 
-void main() => runApp(const TileEditorApp());
+void main() {
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => TileMapEditor(),
+      child: const TileEditorApp(),
+    ),
+  );
+}
 
 class TileEditorApp extends StatelessWidget {
   const TileEditorApp({super.key});
@@ -15,7 +24,7 @@ class TileEditorApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: Scaffold(
+      home: const Scaffold(
         body: LayoutEditor(),
       ),
     );
