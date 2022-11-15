@@ -33,7 +33,7 @@ class LayoutEditor extends StatelessWidget {
                         child: const TileMapCanvas(),
                       ),
                     ),
-                    const Layers(),
+                    Layers(),
                   ],
                 ),
               ),

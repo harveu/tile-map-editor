@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class TileMapEditor extends ChangeNotifier {
   static final TileMapEditor _instance = TileMapEditor._internal();
@@ -14,6 +15,8 @@ class TileMapEditor extends ChangeNotifier {
     _layers = _defaultLayers;
     _currentLayer = 0;
     _selection = [0, 0];
+    _inCanvas = false;
+    _shiftPressed = false;
   }
 
   late String _tileset;
@@ -55,12 +58,22 @@ class TileMapEditor extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addTile(DragUpdateDetails details) {
-    var coords = _getCoordinates(details);
-    var place = '${coords[0]}-${coords[1]}';
+  late bool _inCanvas;
+  void setInCanvas(bool inCanvas) {
+    _inCanvas = inCanvas;
+  }
 
-    //_layers[_currentLayer].removeWhere((key, value) => key == place);
-    _layers[_currentLayer][place] = selection;
+  void addTile(PointerEvent event) {
+    if (_inCanvas) {
+      var coords = _getCoordinates(event);
+      var place = '${coords[0]}-${coords[1]}';
+
+      if (_shiftPressed) {
+        _layers[_currentLayer].removeWhere((key, value) => key == place);
+      } else {
+        _layers[_currentLayer][place] = selection;
+      }
+    }
     notifyListeners();
   }
 
@@ -72,6 +85,13 @@ class TileMapEditor extends ChangeNotifier {
     var tileY = (y / _tileSize).floor();
 
     return [tileX, tileY];
+  }
+
+  late bool _shiftPressed;
+  KeyEventResult handleKeyEvent(FocusNode node, RawKeyEvent event) {
+    _shiftPressed = event.isShiftPressed;
+
+    return KeyEventResult.handled;
   }
 
   final List<Map<String, List<int>>> _defaultLayers = [

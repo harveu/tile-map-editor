@@ -29,7 +29,7 @@ I'll try to code every day, but the project is to improve my skills with game de
 ## Features
 
 - [x] Basic canvas functionality with Flutter (clear canvas, set layers with Provider)
-- [ ] Draw the map using the mouse (In Progress)
+- [x] Draw the map using the mouse
 - [ ] Export the map to PNG image
 - [ ] Import custom tilesets
 - [ ] Save map state to finish later, or continue editing

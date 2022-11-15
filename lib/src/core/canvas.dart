@@ -1,10 +1,10 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:harveu/src/core/canvas_painter.dart';
 import 'package:harveu/src/core/load_image.dart';
 import 'package:harveu/src/core/tile_map_editor.dart';
-import 'package:provider/provider.dart';
 
 class TileMapCanvas extends StatefulWidget {
   const TileMapCanvas({super.key});
@@ -16,6 +16,7 @@ class TileMapCanvas extends StatefulWidget {
 class _TileMapCanvasState extends State<TileMapCanvas> {
   late ui.Image image;
   bool isImageLoaded = false;
+  final FocusNode _focusNode = FocusNode();
 
   _init() async {
     image = await LoadImage.load(TileMapEditor().tileset);
@@ -33,6 +34,13 @@ class _TileMapCanvasState extends State<TileMapCanvas> {
   }
 
   @override
+  void dispose() {
+    _focusNode.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (!isImageLoaded) {
       return const Center(
@@ -40,11 +48,25 @@ class _TileMapCanvasState extends State<TileMapCanvas> {
       );
     }
 
-    return GestureDetector(
-      onPanUpdate: Provider.of<TileMapEditor>(context).addTile,
-      child: Consumer<TileMapEditor>(
-        builder: (context, editor, _) => CustomPaint(
-          painter: TilePainter(image: image, editor: editor),
+    return Focus(
+      onKey: Provider.of<TileMapEditor>(context, listen: false).handleKeyEvent,
+      focusNode: _focusNode,
+      child: MouseRegion(
+        onExit: (event) {
+          Provider.of<TileMapEditor>(context, listen: false).setInCanvas(false);
+          FocusScope.of(context).unfocus();
+        },
+        onEnter: (event) {
+          Provider.of<TileMapEditor>(context, listen: false).setInCanvas(true);
+          FocusScope.of(context).requestFocus(_focusNode);
+        },
+        child: Listener(
+          onPointerMove: Provider.of<TileMapEditor>(context).addTile,
+          child: Consumer<TileMapEditor>(
+            builder: (context, editor, _) => CustomPaint(
+              painter: TilePainter(image: image, editor: editor),
+            ),
+          ),
         ),
       ),
     );
