@@ -29,9 +29,10 @@ I'll try to code every day, but the project is to improve my skills with game de
 ## Features
 
 - [x] Basic canvas functionality with Flutter (clear canvas, set layers with Provider)
-- [ ] Draw the map using the mouse
+- [ ] Draw the map using the mouse (In Progress)
 - [ ] Export the map to PNG image
 - [ ] Import custom tilesets
 - [ ] Save map state to finish later, or continue editing
 - [ ] Create a library of tiles and maps for future use
 - [ ] Improve ability of responsive layout
+- [ ] Improve structure and organization of files
