@@ -24,7 +24,7 @@ I'll try to code every day, but the project is to improve my skills with game de
 
 ## Image
 
-![Day 3 - The basics and beyond](https://user-images.githubusercontent.com/5226773/202017640-b9e123e0-f88e-4354-b526-61c604d1c427.png)
+![Day 3 - The basics and beyond](https://user-images.githubusercontent.com/5226773/202038226-a69369a2-7f5c-4d1b-9591-756ec4af176d.png)
 
 ## Features
 
