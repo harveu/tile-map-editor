@@ -46,17 +46,32 @@ class TileMapEditor extends ChangeNotifier {
 
   void exportMap() {}
 
-  late List<double> _selection;
-  List<double> get selection => _selection;
+  late List<int> _selection;
+  List<int> get selection => _selection;
   void getTile(TapDownDetails details) {
+    var coords = _getCoordinates(details);
+
+    _selection = [coords[0], coords[1]];
+    notifyListeners();
+  }
+
+  void addTile(DragUpdateDetails details) {
+    var coords = _getCoordinates(details);
+    var place = '${coords[0]}-${coords[1]}';
+
+    //_layers[_currentLayer].removeWhere((key, value) => key == place);
+    _layers[_currentLayer][place] = selection;
+    notifyListeners();
+  }
+
+  List<int> _getCoordinates(details) {
     var x = details.localPosition.dx;
     var y = details.localPosition.dy;
 
     var tileX = (x / _tileSize).floor();
     var tileY = (y / _tileSize).floor();
 
-    _selection = [tileX.toDouble(), tileY.toDouble()];
-    notifyListeners();
+    return [tileX, tileY];
   }
 
   final List<Map<String, List<int>>> _defaultLayers = [

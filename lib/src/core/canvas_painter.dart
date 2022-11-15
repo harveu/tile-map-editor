@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:harveu/src/core/tile_map_editor.dart';
 
 class TilePainter extends CustomPainter {
-  TilePainter({required this.image});
+  TilePainter({
+    required this.image,
+    required this.editor,
+  });
 
   ui.Image image;
-  final Size tileSize = Size(
-    TileMapEditor().tileSize,
-    TileMapEditor().tileSize,
-  );
+  TileMapEditor editor;
 
   @override
   void paint(Canvas canvas, Size size) {
-    for (var layer in TileMapEditor().layers) {
+    for (var layer in editor.layers) {
       layer.forEach((key, value) {
         double positionX = double.parse(key.split('-')[0]);
         double positionY = double.parse(key.split('-')[1]);
@@ -22,9 +22,22 @@ class TilePainter extends CustomPainter {
         double tileX = value[0].toDouble();
         double tileY = value[1].toDouble();
 
-        // TODO: Same size of tile
-        Rect grab = Offset(tileX * 32, tileY * 32) & tileSize;
-        Rect place = Offset(positionX * 32, positionY * 32) & tileSize;
+        Rect grab = Offset(
+              tileX * editor.tileSize,
+              tileY * editor.tileSize,
+            ) &
+            Size(
+              editor.tileSize,
+              editor.tileSize,
+            );
+        Rect place = Offset(
+              positionX * editor.tileSize,
+              positionY * editor.tileSize,
+            ) &
+            Size(
+              editor.tileSize,
+              editor.tileSize,
+            );
 
         canvas.drawImageRect(
           image,
@@ -37,5 +50,5 @@ class TilePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(TilePainter oldDelegate) => false;
+  bool shouldRepaint(TilePainter oldDelegate) => true;
 }

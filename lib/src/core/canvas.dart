@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:harveu/src/core/canvas_painter.dart';
 import 'package:harveu/src/core/load_image.dart';
 import 'package:harveu/src/core/tile_map_editor.dart';
+import 'package:provider/provider.dart';
 
 class TileMapCanvas extends StatefulWidget {
   const TileMapCanvas({super.key});
@@ -39,8 +40,13 @@ class _TileMapCanvasState extends State<TileMapCanvas> {
       );
     }
 
-    return CustomPaint(
-      painter: TilePainter(image: image),
+    return GestureDetector(
+      onPanUpdate: Provider.of<TileMapEditor>(context).addTile,
+      child: Consumer<TileMapEditor>(
+        builder: (context, editor, _) => CustomPaint(
+          painter: TilePainter(image: image, editor: editor),
+        ),
+      ),
     );
   }
 }

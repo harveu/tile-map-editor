@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:harveu/src/ui/tile_selector.dart';
 import 'package:provider/provider.dart';
 
 import 'package:harveu/src/core/tile_map_editor.dart';
@@ -36,23 +37,7 @@ class Tiles extends StatelessWidget {
                     'lib/assets/tilesets/${TileMapEditor().tileset}',
                     alignment: Alignment.topLeft,
                   ),
-                  Positioned(
-                    top:
-                        TileMapEditor().selection[1] * TileMapEditor().tileSize,
-                    left:
-                        TileMapEditor().selection[0] * TileMapEditor().tileSize,
-                    child: Container(
-                      width: TileMapEditor().tileSize,
-                      height: TileMapEditor().tileSize,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.purple,
-                          width: 3,
-                          strokeAlign: StrokeAlign.outside,
-                        ),
-                      ),
-                    ),
-                  ),
+                  const TileSelector(),
                 ],
               ),
             ),
