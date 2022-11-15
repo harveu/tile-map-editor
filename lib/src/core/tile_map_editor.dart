@@ -13,6 +13,7 @@ class TileMapEditor extends ChangeNotifier {
 
     _layers = _defaultLayers;
     _currentLayer = 0;
+    _selection = [0, 0];
   }
 
   late String _tileset;
@@ -32,9 +33,7 @@ class TileMapEditor extends ChangeNotifier {
   late List<Map<String, List<int>>> _layers;
   List<Map<String, List<int>>> get layers => _layers;
   void clearCanvas() {
-    print('clearCanvas');
     _layers = [{}, {}, {}];
-    // TODO: re-draw canvas
     notifyListeners();
   }
 
@@ -46,6 +45,19 @@ class TileMapEditor extends ChangeNotifier {
   }
 
   void exportMap() {}
+
+  late List<double> _selection;
+  List<double> get selection => _selection;
+  void getTile(TapDownDetails details) {
+    var x = details.localPosition.dx;
+    var y = details.localPosition.dy;
+
+    var tileX = (x / _tileSize).floor();
+    var tileY = (y / _tileSize).floor();
+
+    _selection = [tileX.toDouble(), tileY.toDouble()];
+    notifyListeners();
+  }
 
   final List<Map<String, List<int>>> _defaultLayers = [
     // Bottom
