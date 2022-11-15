@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:harveu/src/ui/loader.dart';
 import 'package:provider/provider.dart';
 
 import 'package:harveu/src/core/canvas_painter.dart';
@@ -43,9 +44,7 @@ class _TileMapCanvasState extends State<TileMapCanvas> {
   @override
   Widget build(BuildContext context) {
     if (!isImageLoaded) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
+      return const Loader();
     }
 
     return Focus(

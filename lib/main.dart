@@ -1,10 +1,21 @@
+import 'dart:io';
+
+import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:harveu/src/ui/layout.dart';
 import 'package:harveu/src/core/tile_map_editor.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
+    await DesktopWindow.setWindowSize(const Size(1344, 900));
+    await DesktopWindow.setMinWindowSize(const Size(1344, 900));
+    await DesktopWindow.setMaxWindowSize(Size.infinite);
+  }
+
   runApp(
     ChangeNotifierProvider(
       create: (context) => TileMapEditor(),
