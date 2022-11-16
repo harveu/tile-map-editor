@@ -28,13 +28,9 @@ I'll try to code every day, but the project is to improve my skills with game de
 
 ## Features
 
-- Draw the map using the mouse
-- Erase the map using the mouse and hold the shift
-
-## To Do
-
 - [x] Basic canvas functionality with Flutter (clear canvas, set layers with Provider)
 - [x] Draw the map using the mouse
+- [x] Erase the map using the mouse and hold the shift
 - [ ] Export the map to PNG image
 - [ ] Import custom tilesets
 - [ ] Save map state to finish later, or continue editing
