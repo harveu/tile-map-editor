@@ -2,7 +2,7 @@
 
 Simple Tile Map Editor made with Flutter, for RPG games.
 
-The idea is to create a Tile Map Editor, which creates several maps (levels), for role-playing games.
+The idea is to create a Tile Map Editor, which creates several maps (levels), for RPG.
 
 You will be able to upload tilesets, create your map and then export it as an image in PNG format.
 
